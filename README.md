@@ -68,7 +68,7 @@ npm init h3ravel -- --kit="gitlab:user/repo"
 npm init h3ravel -- --kit="bitbucket:user/repo"
 ```
 
-You can also pass specify the branch or tag name as follows:
+You can also pass the branch or tag name as follows:
 
 ```sh
 # Branch name
