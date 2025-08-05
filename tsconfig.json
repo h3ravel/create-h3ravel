@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./build",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "src/*": ["./src/*"]
+    }
+  },
+  "include": ["./**/*.d.ts", "./**/*", "./src/*"],
+  "exclude": ["./build", "/.node_modules"]
+}

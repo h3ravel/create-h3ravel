@@ -1,0 +1,53 @@
+{
+  "name": "create-h3ravel",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Scaffold a new H3ravel applications using templates and starter kits",
+  "main": "build/index.js",
+  "bin": {
+    "create-h3ravel": "bin/run.js"
+  },
+  "exports": {
+    ".": "./bin/run.js"
+  },
+  "keywords": [
+    "h3ravel",
+    "create-h3ravel"
+  ],
+  "scripts": {
+    "quick:test": "pnpm jest",
+    "test": "pnpm run quick:test",
+    "runner": "tsx --experimental-specifier-resolution=node src/run.ts",
+    "build": "tsup && cp logo.txt bin/logo.txt",
+    "version": "pnpm run build",
+    "unlink": "pnpm unlink -g create-h3ravel"
+  },
+  "files": [
+    "bin",
+    "bin/run.d.ts",
+    "bin/run.js"
+  ],
+  "dependencies": {
+    "@antfu/install-pkg": "1.1.0",
+    "chalk": "^5.5.0",
+    "commander": "^14.0.0",
+    "giget": "^2.0.0",
+    "inquirer": "^12.9.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.5",
+    "@swc/core": "^1.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.14.5",
+    "eslint": "^9.32.0",
+    "jest": "^30.0.5",
+    "jest-junit": "^16.0.0",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
+}
