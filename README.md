@@ -2,6 +2,7 @@
 
 [![Framework][ix]][lx]
 [![Create H3ravel][i1]][l1]
+[![Downloads][d1]][d1]
 
 # About Create H3ravel
 
@@ -105,4 +106,5 @@ The H3ravel framework and all it's base packages are open-sourced software licen
 [ix]: https://img.shields.io/npm/v/%40h3ravel%2Fcore?style=flat-square&label=Framework&color=%230970ce
 [lx]: https://www.npmjs.com/package/@h3ravel/core
 [i1]: https://img.shields.io/npm/v/create-h3ravel?style=flat-square&label=create-h3ravel&color=%230970ce
-[l1]: https://www.npmjs.com/package/@h3ravel/create-h3ravel
+[l1]: https://www.npmjs.com/package/create-h3ravel
+[d1]: https://img.shields.io/npm/dt/create-h3ravel?style=flat-square&label=Downloads&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fcreate-h3ravel
