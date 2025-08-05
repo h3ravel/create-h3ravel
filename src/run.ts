@@ -7,6 +7,7 @@ import { templates } from './templates';
 import ora from 'ora';
 import Actions from './actions';
 import { basename, join } from 'node:path';
+import { slugify } from '@h3ravel/support';
 
 const program = new Command();
 
@@ -24,7 +25,7 @@ program
     .addArgument(new Argument('[location]', 'The location where this project should be created relative to the current dir.'))
     .action(async (pathName, options) => {
 
-        let { appName, template, install, location, token, description } = await inquirer
+        let { appName, description } = await inquirer
             .prompt([
                 {
                     type: "input",
@@ -38,39 +39,42 @@ program
                     name: "description",
                     message: "Project Description:",
                     when: () => !options.desc,
-                },
-                {
-                    type: "input",
-                    name: "location",
-                    message: "Installation location relative to the current dir:",
-                    default: basename(process.cwd()),
-                    when: () => !pathName,
-                },
-                {
-                    type: "list",
-                    name: "template",
-                    message: "Choose starter template kit:",
-                    choices: <never>templates.map(e => ({
-                        name: e.name,
-                        value: e.alias,
-                        disabled: !e.source ? '(Unavailable at this time)' : false,
-                    })),
-                    default: 'full',
-                    when: () => !options.kit,
-                },
-                {
-                    type: "input",
-                    name: "token",
-                    message: "Authentication token:",
-                    when: () => options.kit && !options.token,
-                },
-                {
-                    type: 'confirm',
-                    name: "install",
-                    message: "Would you want to install node_modules right away:",
-                    default: true,
-                    when: () => !options.install,
-                },
+                }]
+            )
+
+        let { template, install, location, token } = await inquirer
+            .prompt([{
+                type: "input",
+                name: "location",
+                message: "Installation location relative to the current dir:",
+                default: slugify(options.name ?? appName ?? basename(process.cwd()), '-'),
+                when: () => !pathName,
+            },
+            {
+                type: "list",
+                name: "template",
+                message: "Choose starter template kit:",
+                choices: <never>templates.map(e => ({
+                    name: e.name,
+                    value: e.alias,
+                    disabled: !e.source ? '(Unavailable at this time)' : false,
+                })),
+                default: 'full',
+                when: () => !options.kit,
+            },
+            {
+                type: "input",
+                name: "token",
+                message: "Authentication token:",
+                when: () => options.kit && !options.token,
+            },
+            {
+                type: 'confirm',
+                name: "install",
+                message: "Would you want to install node_modules right away:",
+                default: true,
+                when: () => !options.install,
+            },
             ])
 
         token = options.token ?? token

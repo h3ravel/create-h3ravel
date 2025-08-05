@@ -20,7 +20,9 @@
     "runner": "tsx --experimental-specifier-resolution=node src/run.ts",
     "build": "tsup && cp logo.txt bin/logo.txt",
     "version": "pnpm run build",
-    "unlink": "pnpm unlink -g create-h3ravel"
+    "unlink": "npm unlink -g create-h3ravel",
+    "release": "pnpm build && pnpm changeset version && pnpm changeset publish",
+    "publish": "pnpm build && pnpm -r publish --access public"
   },
   "files": [
     "bin",
@@ -28,6 +30,7 @@
     "bin/run.js"
   ],
   "dependencies": {
+    "@h3ravel/support": "^0.7.0",
     "@antfu/install-pkg": "1.1.0",
     "chalk": "^5.5.0",
     "commander": "^14.0.0",

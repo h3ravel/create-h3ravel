@@ -5,6 +5,7 @@ import { detectPackageManager, installPackage } from "@antfu/install-pkg";
 import chalk from "chalk";
 import { downloadTemplate } from "giget";
 import { existsSync } from "node:fs";
+import { slugify } from "@h3ravel/support";
 import { unlink } from "node:fs/promises";
 
 export default class {
@@ -57,7 +58,7 @@ export default class {
         const pkg = await readFile(pkgPath!, 'utf-8').then(JSON.parse)
 
         delete pkg.packageManager
-        pkg.name = this.appName ?? basename(this.location!).replace('.', '')
+        pkg.name = slugify(this.appName ?? basename(this.location!).replace('.', ''), '-')
         if (this.description) {
             pkg.description = this.description
         }
