@@ -89,7 +89,7 @@ npm init h3ravel -- --kit="github:github_user/repo" --token="github_token"
 
 ## Contributing
 
-Thank you for considering contributing to the H3ravel framework! The contribution guide can be found in the [H3ravel documentation](https://h3ravel.toneflix.net/contributing).
+Thank you for considering contributing to the H3ravel framework! The contribution guide can be found in the [Contribution Guide](https://h3ravel.toneflix.net/contributing) section of the H3ravel documentation.
 
 ## Code of Conduct
 
