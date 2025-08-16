@@ -3,3 +3,5 @@ build
 coverage
 .env
 .temp
+bin/*
+!bin/logo.txt
