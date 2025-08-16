@@ -5,3 +5,4 @@ coverage
 .temp
 bin/*
 !bin/logo.txt
+.DS_Store
