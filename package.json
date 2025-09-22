@@ -1,7 +1,7 @@
 {
   "name": "create-h3ravel",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Scaffold a new H3ravel applications using templates and starter kits",
   "main": "build/index.js",
   "bin": {
@@ -30,8 +30,8 @@
     "bin/run.js"
   ],
   "dependencies": {
-    "@h3ravel/support": "^0.7.0",
     "@antfu/install-pkg": "1.1.0",
+    "@h3ravel/support": "^0.10.0",
     "chalk": "^5.5.0",
     "commander": "^14.0.0",
     "giget": "^2.0.0",

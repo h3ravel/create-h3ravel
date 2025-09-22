@@ -99,10 +99,11 @@ program
         spinner.info(chalk.green("Cleaning Up...")).start();
         await actions.cleanup()
 
-        spinner.info(chalk.green("Creating .env...")).start();
+        spinner.info(chalk.green("Initializing Project...")).start();
         await actions.copyExampleEnv()
+        await actions.createTsConfig()
 
-        spinner.succeed(chalk.green('Template Downloaded!'))
+        spinner.succeed(chalk.green('Project initialized successfully!'))
 
         await actions.complete()
     });

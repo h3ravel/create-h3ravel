@@ -1,5 +1,6 @@
+import { baseTsconfig, mainTsconfig } from "./tsconfig";
 import { basename, join, relative } from "node:path";
-import { copyFile, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
 
 import chalk from "chalk";
@@ -51,6 +52,7 @@ export default class {
         console.log('')
         console.log(`Have any questions?`)
         console.log(`Join our Discord server - ${chalk.yellow('https://discord.gg/hsG2A8PuGb')}`)
+        console.log(`Checkout the documentation - ${chalk.yellow('https://h3ravel.toneflix.net')}`)
     }
 
     async cleanup () {
@@ -95,5 +97,13 @@ export default class {
         if (existsSync(exampleEnvPath)) {
             await copyFile(exampleEnvPath, envPath)
         }
+    }
+
+    async createTsConfig () {
+        const tscPath = join(this.location!, '.h3ravel')
+
+        await mkdir(tscPath, { recursive: true })
+        await writeFile(join(tscPath, 'tsconfig.json'), JSON.stringify(mainTsconfig, null, 2))
+        await writeFile(join(this.location!, 'tsconfig.json'), JSON.stringify(baseTsconfig, null, 2))
     }
 }
