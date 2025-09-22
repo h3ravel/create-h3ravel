@@ -9,6 +9,7 @@ import { basename, join } from 'node:path';
 import { slugify } from '@h3ravel/support';
 import { AbortPromptError, ExitPromptError } from '@inquirer/core';
 import { Logger } from '@h3ravel/shared';
+import { altLogo } from './logo';
 
 async function main () {
     const program = new Command();
@@ -26,6 +27,8 @@ async function main () {
         .option('-k, --kit <string>", "Starter template kit')
         .addArgument(new Argument('[location]', 'The location where this project should be created relative to the current dir.'))
         .action(async (pathName, options) => {
+
+            console.log(altLogo, `font-family: monospace`)
 
             let { appName, description } = await inquirer.prompt([
                 {
