@@ -18,7 +18,7 @@
     "quick:test": "pnpm jest",
     "test": "pnpm run quick:test",
     "runner": "tsx --experimental-specifier-resolution=node src/run.ts",
-    "build": "tsup && cp logo.txt bin/logo.txt",
+    "build": "tsdown",
     "version": "pnpm run build",
     "unlink": "npm unlink -g create-h3ravel",
     "release": "pnpm build && pnpm changeset version && pnpm changeset publish",
@@ -49,7 +49,7 @@
     "jest-junit": "^16.0.0",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.15.4",
     "tsx": "^4.20.3",
     "typescript": "^5.4.5"
   },
