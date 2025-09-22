@@ -3,7 +3,7 @@ import { basename, join, relative } from "node:path";
 import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
 
-import chalk from "chalk";
+import { Logger } from "@h3ravel/shared";
 import { downloadTemplate } from "giget";
 import { existsSync } from "node:fs";
 import { slugify } from "@h3ravel/support";
@@ -44,15 +44,19 @@ export default class {
 
     async complete () {
         const packageManager = (await detectPackageManager()) ?? 'npm'
+
         console.log('')
-        console.log('Your h3ravel project has been created successfully!')
-        console.log(chalk.cyan('cd ' + relative(process.cwd(), this.location!)))
-        console.log(chalk.cyan(`${packageManager} run dev`))
-        console.log(chalk.cyan('Open http://localhost:4444'))
+
+        Logger.success('Your h3ravel project has been created successfully')
+        Logger.parse([['cd ' + relative(process.cwd(), this.location!), 'cyan']])
+        Logger.parse([[`${packageManager} run dev`, 'cyan']])
+        Logger.parse([['Open http://localhost:4444', 'cyan']])
+
         console.log('')
-        console.log(`Have any questions?`)
-        console.log(`Join our Discord server - ${chalk.yellow('https://discord.gg/hsG2A8PuGb')}`)
-        console.log(`Checkout the documentation - ${chalk.yellow('https://h3ravel.toneflix.net')}`)
+
+        Logger.parse([['Have any questions', 'white']])
+        Logger.parse([['Join our Discord server -', 'white'], ['https://discord.gg/hsG2A8PuGb', 'yellow']])
+        Logger.parse([['Checkout the documentation -', 'white'], ['https://h3ravel.toneflix.net', 'yellow']])
     }
 
     async cleanup () {
