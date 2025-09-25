@@ -1,5 +1,11 @@
 # create-h3ravel
 
+## 0.3.2
+
+### Patch Changes
+
+- 5acfb32: feat: use custom scripts for package.json
+
 ## 0.3.0
 
 ### Minor Changes
