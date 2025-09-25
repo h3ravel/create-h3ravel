@@ -43,14 +43,12 @@ export default class {
     }
 
     async complete () {
-        const packageManager = (await detectPackageManager()) ?? 'npm'
-
         console.log('')
 
         Logger.success('Your h3ravel project has been created successfully')
         Logger.parse([['cd ' + relative(process.cwd(), this.location!), 'cyan']])
-        Logger.parse([[`${packageManager} run dev`, 'cyan']])
-        Logger.parse([['Open http://localhost:4444', 'cyan']])
+        Logger.parse([[`npx musket fire`, 'cyan']])
+        Logger.parse([['Open http://localhost:3000', 'cyan']])
 
         console.log('')
 

@@ -1,5 +1,11 @@
 # create-h3ravel
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: show musket fire after installation
+
 ## 0.3.2
 
 ### Patch Changes
