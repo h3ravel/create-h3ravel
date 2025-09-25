@@ -1,4 +1,4 @@
-import { baseTsconfig, mainTsconfig } from "./tsconfig";
+import { baseTsconfig, mainTsconfig, packageJsonScript } from "./scripts";
 import { basename, join, relative } from "node:path";
 import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
@@ -65,6 +65,7 @@ export default class {
 
         delete pkg.packageManager
         pkg.name = slugify(this.appName ?? basename(this.location!).replace('.', ''), '-')
+        pkg.scripts = packageJsonScript
         if (this.description) {
             pkg.description = this.description
         }
