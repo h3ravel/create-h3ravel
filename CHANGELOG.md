@@ -1,5 +1,11 @@
 # create-h3ravel
 
+## 0.3.0
+
+### Minor Changes
+
+- 8e82bad: feat: create db.sqlite after installation
+
 ## 0.2.3
 
 ### Patch Changes

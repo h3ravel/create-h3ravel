@@ -1,10 +1,13 @@
 {
   "name": "create-h3ravel",
   "type": "module",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Scaffold a new H3ravel applications using templates and starter kits",
   "main": "build/index.js",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "create-h3ravel": "bin/run.js"
   },
