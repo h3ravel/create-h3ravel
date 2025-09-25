@@ -26,7 +26,7 @@
     "version": "pnpm run build",
     "unlink": "npm unlink -g create-h3ravel",
     "release": "pnpm build && pnpm changeset version && pnpm changeset publish",
-    "publish": "pnpm build && pnpm publish --tag latest"
+    "publish-it": "pnpm build && pnpm publish --tag latest"
   },
   "files": [
     "bin",
