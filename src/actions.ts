@@ -109,5 +109,8 @@ export default class {
         await mkdir(tscPath, { recursive: true })
         await writeFile(join(tscPath, 'tsconfig.json'), JSON.stringify(mainTsconfig, null, 2))
         await writeFile(join(this.location!, 'tsconfig.json'), JSON.stringify(baseTsconfig, null, 2))
+        if (!existsSync(join(this.location!, 'src/database/db.sqlite'))) {
+            await writeFile(join(this.location!, 'src/database/db.sqlite'), '')
+        }
     }
 }
