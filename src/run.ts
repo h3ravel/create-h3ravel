@@ -24,7 +24,8 @@ async function main () {
         .option('-i, --install', 'Install node_modules right away.')
         .option('-t, --token <string>', 'Kit repo authentication token.')
         .option('-d, --desc <string>', 'Project Description.')
-        .option('-k, --kit <string>", "Starter template kit')
+        .option('-k, --kit <string>', 'Starter template kit.')
+        .option('-o, --overwrite', 'Overwrite the installation directory if it is not empty.')
         .addArgument(new Argument('[location]', 'The location where this project should be created relative to the current dir.'))
         .action(async (pathName, options) => {
 
@@ -109,7 +110,7 @@ async function main () {
             const actions = new Actions(join(process.cwd(), location), appName, description);
 
             const spinner = ora(`Loading Template...`).start();
-            await actions.download(kit?.source ?? template, install);
+            await actions.download(kit?.source ?? template, install, undefined, options.overwrite);
 
             spinner.info(Logger.parse([['Cleaning Up...', 'green']], '', false)).start();
             await actions.cleanup()
@@ -120,7 +121,7 @@ async function main () {
 
             spinner.succeed(Logger.parse([['Project initialization complete!', 'green']], '', false))
 
-            await actions.complete()
+            await actions.complete(install)
         });
 
     program.parse();

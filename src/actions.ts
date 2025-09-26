@@ -1,4 +1,4 @@
-import { baseTsconfig, mainTsconfig, packageJsonScript } from "./scripts";
+import { Resolver, baseTsconfig, mainTsconfig, packageJsonScript } from "@h3ravel/shared";
 import { basename, join, relative } from "node:path";
 import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
@@ -18,9 +18,14 @@ export default class {
         }
     }
 
-    async download (template: string, install = false, auth?: string) {
-        if (this.location?.includes('.temp')) {
+    async download (template: string, install = false, auth?: string, overwrite = false) {
+        if (this.location?.includes('.temp') || (overwrite && existsSync(this.location!))) {
             await rm(this.location!, { force: true, recursive: true })
+        } else if (existsSync(this.location!)) {
+            console.log('\n')
+            Logger.parse([[' ERROR ', 'bgRed'], [this.location!, ['gray', 'italic']], ['is not empty.', 'white']], ' ')
+            console.log('')
+            process.exit(0)
         }
 
         this.skipInstallation = !install
@@ -42,12 +47,15 @@ export default class {
         })
     }
 
-    async complete () {
+    async complete (installed = false) {
         console.log('')
 
         Logger.success('Your h3ravel project has been created successfully')
-        Logger.parse([['cd ' + relative(process.cwd(), this.location!), 'cyan']])
-        Logger.parse([[`npx musket fire`, 'cyan']])
+        Logger.parse([['cd', 'cyan'], ['./' + relative(process.cwd(), this.location!), 'green']])
+        if (!installed) {
+            Logger.parse([[await Resolver.getPakageInstallCommand(), 'cyan']])
+        }
+        Logger.parse([['npx', 'cyan'], ['musket fire', 'green']], ' ')
         Logger.parse([['Open http://localhost:3000', 'cyan']])
 
         console.log('')
