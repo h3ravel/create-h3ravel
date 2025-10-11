@@ -6,7 +6,7 @@ import { templates } from './templates';
 import ora from 'ora';
 import Actions from './actions';
 import { basename, join } from 'node:path';
-import { slugify } from '@h3ravel/support';
+import { Str } from '@h3ravel/support';
 import { AbortPromptError, ExitPromptError } from '@inquirer/core';
 import { Logger } from '@h3ravel/shared';
 import { altLogo } from './logo';
@@ -58,7 +58,7 @@ async function main () {
                 type: "input",
                 name: "location",
                 message: "Installation location relative to the current dir:",
-                default: slugify(options.name ?? appName ?? basename(process.cwd()), '-'),
+                default: Str.slugify(options.name ?? appName ?? basename(process.cwd()), '-'),
                 when: () => !pathName,
             },
             {

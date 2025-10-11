@@ -1,12 +1,11 @@
-import { Resolver, baseTsconfig, mainTsconfig, packageJsonScript } from "@h3ravel/shared";
+import { Logger, Resolver, baseTsconfig, mainTsconfig, packageJsonScript } from "@h3ravel/shared";
 import { basename, join, relative } from "node:path";
 import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
 
-import { Logger } from "@h3ravel/shared";
+import { Str } from "@h3ravel/support";
 import { downloadTemplate } from "giget";
 import { existsSync } from "node:fs";
-import { slugify } from "@h3ravel/support";
 import { unlink } from "node:fs/promises";
 
 export default class {
@@ -70,7 +69,7 @@ export default class {
         const pkg = await readFile(pkgPath!, 'utf-8').then(JSON.parse)
 
         delete pkg.packageManager
-        pkg.name = slugify(this.appName ?? basename(this.location!).replace('.', ''), '-')
+        pkg.name = Str.slugify(this.appName ?? basename(this.location!).replace('.', ''), '-')
         pkg.scripts = packageJsonScript
         if (this.description) {
             pkg.description = this.description
