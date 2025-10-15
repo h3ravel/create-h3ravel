@@ -1,7 +1,7 @@
 {
   "name": "create-h3ravel",
   "type": "module",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Scaffold a new H3ravel applications using templates and starter kits",
   "main": "build/index.js",
   "private": false,
@@ -19,7 +19,7 @@
     "create-h3ravel"
   ],
   "scripts": {
-    "quick:test": "pnpm jest",
+    "quick:test": "pnpm vitest",
     "test": "pnpm run quick:test",
     "runner": "tsx --experimental-specifier-resolution=node src/run.ts",
     "build": "tsdown",
@@ -35,10 +35,10 @@
   ],
   "dependencies": {
     "@antfu/install-pkg": "1.1.0",
+    "@h3ravel/musket": "^0.2.0",
     "@h3ravel/shared": "^0.22.2",
     "@h3ravel/support": "^0.14.1",
     "@inquirer/core": "^10.2.2",
-    "@h3ravel/musket": "^0.2.0",
     "giget": "^2.0.0",
     "inquirer": "^12.9.6",
     "ora": "^9.0.0"
@@ -46,16 +46,14 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.5",
     "@swc/core": "^1.6.1",
-    "@types/jest": "^30.0.0",
     "@types/node": "^20.14.5",
     "eslint": "^9.32.0",
-    "jest": "^30.0.5",
-    "jest-junit": "^16.0.0",
-    "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "tsdown": "^0.15.4",
     "tsx": "^4.20.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.14.0"
 }
