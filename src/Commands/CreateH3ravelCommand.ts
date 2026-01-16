@@ -17,6 +17,7 @@ export class CreateH3ravelCommand extends Command {
         {--t|token?: Kit repo authentication token.}
         {--d|desc?: Project Description.}
         {--k|kit?: Starter template kit.}
+        {--p|pre: Download prerelease version if available.}
         {--o|overwrite: Overwrite the installation directory if it is not empty.}
     `;
     protected description = 'Display a personalized greeting.';
@@ -41,8 +42,8 @@ export class CreateH3ravelCommand extends Command {
                 message: "Project Description:",
                 default: 'Modern TypeScript runtime-agnostic web framework built on top of H3.',
                 when: () => !options.desc,
-            }]
-        ).catch(err => {
+            }
+        ]).catch(err => {
             if (err instanceof AbortPromptError || err instanceof ExitPromptError) {
                 this.info('Thanks for trying out H3ravel.')
                 process.exit(0)
@@ -50,38 +51,27 @@ export class CreateH3ravelCommand extends Command {
             return err
         })
 
-        let { template, install, location, token } = await inquirer.prompt([{
-            type: "input",
-            name: "location",
-            message: "Installation location relative to the current dir:",
-            default: Str.slugify(options.name ?? appName ?? basename(process.cwd()), '-'),
-            when: () => !pathName,
-        },
-        {
-            type: "list",
-            name: "template",
-            message: "Choose starter template kit:",
-            choices: <never>templates.map(e => ({
-                name: e.name,
-                value: e.alias,
-                disabled: !e.source ? '(Unavailable at this time)' : false,
-            })),
-            default: 'full',
-            when: () => !options.kit,
-        },
-        {
-            type: "input",
-            name: "token",
-            message: "Authentication token:",
-            when: () => options.kit && !options.token,
-        },
-        {
-            type: 'confirm',
-            name: "install",
-            message: "Would you want to install node_modules right away:",
-            default: true,
-            when: () => !options.install,
-        }]).catch(err => {
+        let { location, template } = await inquirer.prompt([
+            {
+                type: "input",
+                name: "location",
+                message: "Installation location relative to the current dir:",
+                default: Str.slugify(options.name ?? appName ?? basename(process.cwd()), '-'),
+                when: () => !pathName,
+            },
+            {
+                type: "list",
+                name: "template",
+                message: "Choose starter template kit:",
+                choices: <never>templates.map(e => ({
+                    name: e.name,
+                    value: e.alias,
+                    disabled: !e.source ? '(Unavailable at this time)' : false,
+                })),
+                default: 'full',
+                when: () => !options.kit,
+            }
+        ]).catch(err => {
             if (err instanceof AbortPromptError || err instanceof ExitPromptError) {
                 this.info('Thanks for trying out H3ravel.')
                 process.exit(0)
@@ -89,6 +79,41 @@ export class CreateH3ravelCommand extends Command {
             return err
         })
 
+        /**
+         * Find selected template kit
+         */
+        const kit = templates.find(e => e.alias === template)!
+
+        let { install, token, pre } = await inquirer.prompt([
+            {
+                type: "confirm",
+                name: "pre",
+                message: `An alpha version of the ${kit.name.replace(/\s*kit$/i, '').trim()} kit is available. Would you like to use it instead?`,
+                default: false,
+                when: () => kit.prereleaseSource && !options.pre,
+            } as never,
+            {
+                type: "input",
+                name: "token",
+                message: "Authentication token:",
+                when: () => options.kit && !options.token,
+            },
+            {
+                type: 'confirm',
+                name: "install",
+                message: "Would you want to install node_modules right away:",
+                default: true,
+                when: () => !options.install,
+            }
+        ]).catch(err => {
+            if (err instanceof AbortPromptError || err instanceof ExitPromptError) {
+                this.info('Thanks for trying out H3ravel.')
+                process.exit(0)
+            }
+            return err
+        })
+
+        pre = options.pre ?? pre
         token = options.token ?? token
         appName = options.name ?? appName
         install = options.install ?? install
@@ -96,17 +121,19 @@ export class CreateH3ravelCommand extends Command {
         location = pathName ?? location
         description = options.description ?? description
 
-        const kit = templates.find(e => e.alias === template)!
-
+        /**
+        * Validate selected kit
+        */
         if (kit && !kit.source) {
             this.error(`ERROR: The ${kit.name} kit is not currently available`)
             process.exit(1)
         }
 
+        const source: string = pre && kit.prereleaseSource ? kit.prereleaseSource! : kit.source
         const actions = new Actions(join(process.cwd(), location), appName, description);
-
         const spinner = ora(`Loading Template...`).start();
-        await actions.download(kit?.source ?? template, install, undefined, options.overwrite);
+
+        await actions.download(source, install, undefined, options.overwrite);
 
         spinner.info(Logger.parse([['Cleaning Up...', 'green']], '', false)).start();
         await actions.cleanup()
