@@ -35,9 +35,10 @@
   ],
   "dependencies": {
     "@antfu/install-pkg": "1.1.0",
-    "@h3ravel/musket": "^0.2.0",
-    "@h3ravel/shared": "^0.22.2",
-    "@h3ravel/support": "^0.14.1",
+    "@h3ravel/collect.js": "^5.3.4",
+    "@h3ravel/musket": "^0.6.12",
+    "@h3ravel/shared": "^0.28.4",
+    "@h3ravel/support": "^0.16.1",
     "@inquirer/core": "^10.2.2",
     "giget": "^2.0.0",
     "inquirer": "^12.9.6",
