@@ -15,7 +15,7 @@ export const templates = [
         name: 'Full Starter Kit',
         alias: 'full',
         hint: 'A full H3ravel application with everything possible',
-        source: 'github:h3ravel/h3ravel#77e2ff2',
+        source: 'github:h3ravel/h3ravel#3fbb538',
         prereleaseSource: 'github:h3ravel/h3ravel#2eec534',
     },
     {

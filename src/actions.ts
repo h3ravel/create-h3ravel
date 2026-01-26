@@ -54,6 +54,7 @@ export default class {
         if (!installed) {
             Logger.parse([[await Resolver.getPakageInstallCommand(), 'cyan']])
         }
+        Logger.parse([['npx', 'cyan'], ['prepare', 'green']], ' ')
         Logger.parse([['npx', 'cyan'], ['musket fire', 'green']], ' ')
         Logger.parse([['Open http://localhost:3000', 'cyan']])
 
