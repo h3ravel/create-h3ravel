@@ -1,7 +1,7 @@
 {
   "name": "create-h3ravel",
   "type": "module",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Scaffold a new H3ravel applications using templates and starter kits",
   "main": "build/index.js",
   "private": false,

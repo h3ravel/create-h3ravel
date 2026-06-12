@@ -13,5 +13,11 @@ export default defineConfig({
             'dotenv'
         ],
     },
-    clean: true
+    clean: true,
+    outExtensions () {
+        return {
+            js: '.js',
+            dts: '.d.ts'
+        }
+    }
 }) 
