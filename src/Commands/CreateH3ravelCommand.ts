@@ -121,6 +121,7 @@ export class CreateH3ravelCommand extends Command {
         location = pathName ?? location
         description = options.description ?? description
 
+        void token
         /**
         * Validate selected kit
         */

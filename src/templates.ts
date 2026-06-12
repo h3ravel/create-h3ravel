@@ -16,7 +16,7 @@ export const templates = [
         alias: 'full',
         hint: 'A full H3ravel application with everything possible',
         source: 'github:h3ravel/h3ravel#3fbb538',
-        prereleaseSource: 'github:h3ravel/h3ravel#fe175fa',
+        prereleaseSource: 'github:h3ravel/h3ravel#45d7678',
     },
     {
         name: 'Lean Starter Kit',
