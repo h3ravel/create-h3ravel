@@ -5,12 +5,13 @@ export default defineConfig({
     format: ['esm', 'cjs'],
     outDir: 'bin',
     dts: true,
-    sourcemap: true,
-    external: [
-        'fs',
-        'path',
-        'os',
-        'dotenv'
-    ],
+    deps: {
+        neverBundle: [
+            'fs',
+            'path',
+            'os',
+            'dotenv'
+        ],
+    },
     clean: true
 }) 
